@@ -16,58 +16,86 @@ public class Board {
     }
 
     public boolean hasWin() {
-        return (   lineHasWin(line1())
-                || lineHasWin(line2())
-                || lineHasWin(line3())
-                || lineHasWin(column1())
-                || lineHasWin(column2())
-                || lineHasWin(column3())
-                || lineHasWin(diagonal1())
-                || lineHasWin(diagonal2())
-        );
+        String[][] rows = getRows();
+        String[][] columns = getColumns();
+        String[][] diagonals = getDiagonals();
+
+       for(int i = 0; i < rows.length; i++) {
+           if (lineHasWin(rows[i])) {
+               return true;
+           }
+       }
+
+        for(int i = 0; i < columns.length; i++) {
+            if (lineHasWin(columns[i])) {
+                return true;
+            }
+        }
+
+        for(int i = 0; i < diagonals.length; i++) {
+            if (lineHasWin(diagonals[i])) {
+                return true;
+            }
+        }
+
+       return false;
     }
 
     private boolean lineHasWin(String[] line) {
         return Arrays.stream(line).distinct().count() == 1;
     }
 
-    private String[] line1() {
-        String[] line = new String[]{this.grid[0], this.grid[1], this.grid[2]};
-        return line;
+    private String[][] getRows() {
+        int chunk = 3;
+        int counter = 0;
+        String[][] rows = new String[chunk][];
+
+        for(int i = 0; i < grid.length; i += chunk) {
+            rows[counter] = Arrays.copyOfRange(grid, i, i + chunk);
+            counter++;
+        }
+
+        return rows;
     }
 
-    private String[] line2() {
-        String[] line = new String[]{this.grid[3], this.grid[4], this.grid[5]};
-        return line;
+    private String[][] getColumns() {
+        String[][] rows = getRows();
+        String[][] columns = new String[getSide()][];
+
+        for(int i = 0; i < getSide(); i++) {
+            String[] column = new String[getSide()];
+
+            for(int j = 0; j < getSide(); j++) {
+                column[j] = rows[j][i];
+            }
+            columns[i] = column;
+        }
+
+        return columns;
     }
 
-    private String[] line3() {
-        String[] line = new String[]{this.grid[6], this.grid[7], this.grid[8]};
-        return line;
+    private String[][] getDiagonals() {
+        int side = getSide();
+        int counter = side - 1;
+
+        String[][] rows = getRows();
+        String[] leftDiagonal = new String[side];
+        String[] rightDiagonal = new String[side];
+        String[][] diagonals = new String[side][];
+
+        for(int i = 0; i < side; i++) {
+            leftDiagonal[i] = rows[i][i];
+            rightDiagonal[i] = rows[i][counter];
+            counter--;
+        }
+
+        diagonals[0] = leftDiagonal;
+        diagonals[1] = rightDiagonal;
+
+        return diagonals;
     }
 
-    private String[] column1() {
-        String[] column = new String[]{this.grid[0], this.grid[3], this.grid[6]};
-        return column;
-    }
-
-    private String[] column2() {
-        String[] column = new String[]{this.grid[1], this.grid[4], this.grid[7]};
-        return column;
-    }
-
-    private String[] column3() {
-        String[] column = new String[]{this.grid[2], this.grid[5], this.grid[8]};
-        return column;
-    }
-
-    private String[] diagonal1() {
-        String[] diagonal = new String[]{this.grid[0], this.grid[4], this.grid[8]};
-        return diagonal;
-    }
-
-    private String[] diagonal2() {
-        String[] diagonal = new String[]{this.grid[2], this.grid[4], this.grid[6]};
-        return diagonal;
+    private int getSide() {
+        return (int)Math.sqrt(grid.length);
     }
 }
