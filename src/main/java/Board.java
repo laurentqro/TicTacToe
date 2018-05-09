@@ -1,39 +1,21 @@
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Board {
-    private String[] grid;
+    private List<String> grid;
 
     public Board() {
-        this.grid = new String[]{"1", "2", "3", "4", "5", "6", "7", "8", "9"};
+        this.grid = new ArrayList<>(Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9"));
     }
 
-    public String[] getGrid() {
-        return grid;
-    }
-
-    public void setGrid(String[] grid) {
+    public void setGrid(List<String> grid) {
         this.grid = grid;
     }
 
     public boolean hasWin() {
-        String[][] rows = getRows();
-        String[][] columns = getColumns();
-        String[][] diagonals = getDiagonals();
-
-       for(int i = 0; i < rows.length; i++) {
-           if (lineHasWin(rows[i])) {
-               return true;
-           }
-       }
-
-        for(int i = 0; i < columns.length; i++) {
-            if (lineHasWin(columns[i])) {
-                return true;
-            }
-        }
-
-        for(int i = 0; i < diagonals.length; i++) {
-            if (lineHasWin(diagonals[i])) {
+        for(Line line : getLines()) {
+            if (line.hasWin()) {
                 return true;
             }
         }
@@ -41,61 +23,67 @@ public class Board {
        return false;
     }
 
-    private boolean lineHasWin(String[] line) {
-        return Arrays.stream(line).distinct().count() == 1;
+    private List<Line> getLines() {
+        List<Line> lines = new ArrayList<>();
+
+        lines.addAll(getRows());
+        lines.addAll(getColumns());
+        lines.addAll(getDiagonals());
+
+        return lines;
     }
 
-    private String[][] getRows() {
-        int chunk = 3;
-        int counter = 0;
-        String[][] rows = new String[chunk][];
+    private List<Line> getRows() {
+        int side = getSide();
+        List<Line> rows = new ArrayList<>();
 
-        for(int i = 0; i < grid.length; i += chunk) {
-            rows[counter] = Arrays.copyOfRange(grid, i, i + chunk);
-            counter++;
+        for(int i = 0; i < grid.size(); i += side) {
+            List<String> cells = grid.subList(i, i + side);
+            rows.add(new Line(cells));
         }
 
         return rows;
     }
 
-    private String[][] getColumns() {
-        String[][] rows = getRows();
-        String[][] columns = new String[getSide()][];
+    private List<Line> getColumns() {
+        List<Line> rows = getRows();
+        List<Line> columns = new ArrayList<>();
 
-        for(int i = 0; i < getSide(); i++) {
-            String[] column = new String[getSide()];
+        int side = getSide();
 
-            for(int j = 0; j < getSide(); j++) {
-                column[j] = rows[j][i];
+        for(int i = 0; i < side; i++) {
+            List<String> column = new ArrayList<>();
+
+            for(Line row : getRows()) {
+                column.add(row.getCellAtPosition(i));
             }
-            columns[i] = column;
+
+            columns.add(new Line(column));
         }
 
         return columns;
     }
 
-    private String[][] getDiagonals() {
+    private List<Line> getDiagonals() {
+        List<Line> diagonals = new ArrayList<>();
+        List<String> leftDiagonal = new ArrayList<>();
+        List<String> rightDiagonal = new ArrayList<>();
+
         int side = getSide();
         int counter = side - 1;
-
-        String[][] rows = getRows();
-        String[] leftDiagonal = new String[side];
-        String[] rightDiagonal = new String[side];
-        String[][] diagonals = new String[side][];
-
         for(int i = 0; i < side; i++) {
-            leftDiagonal[i] = rows[i][i];
-            rightDiagonal[i] = rows[i][counter];
+            leftDiagonal.add(getRows().get(i).getCellAtPosition(i));
+            rightDiagonal.add(getRows().get(i).getCellAtPosition(counter));
             counter--;
         }
 
-        diagonals[0] = leftDiagonal;
-        diagonals[1] = rightDiagonal;
+        diagonals.add(new Line(leftDiagonal));
+        diagonals.add(new Line(rightDiagonal));
 
         return diagonals;
     }
 
     private int getSide() {
-        return (int)Math.sqrt(grid.length);
+        return (int)Math.sqrt(grid.size());
     }
 }
