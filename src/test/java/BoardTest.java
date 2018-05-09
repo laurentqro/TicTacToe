@@ -77,4 +77,13 @@ public class BoardTest {
 
         assertTrue(board.hasWin());
     }
+
+    @Test
+    public void boardHasTie() {
+        Board board = new Board();
+        List<String> grid = new ArrayList<>(Arrays.asList("X", "O", "X", "O", "O", "X", "X", "X", "O"));
+        board.setGrid(grid);
+
+        assertTrue(board.hasTie());
+    }
 }

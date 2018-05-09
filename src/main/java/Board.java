@@ -23,6 +23,10 @@ public class Board {
        return false;
     }
 
+    public boolean hasTie() {
+        return isFull() & !hasWin();
+    }
+
     private List<Line> getLines() {
         List<Line> lines = new ArrayList<>();
 
@@ -81,6 +85,10 @@ public class Board {
         diagonals.add(new Line(rightDiagonal));
 
         return diagonals;
+    }
+
+    private boolean isFull() {
+        return getLines().stream().allMatch(line -> line.isFull());
     }
 
     private int getSide() {

@@ -18,4 +18,8 @@ public class Line {
     public boolean hasWin() {
         return cells.stream().distinct().count() == 1;
     }
+
+    public boolean isFull() {
+        return cells.stream().allMatch(cell -> (cell == "X" || cell == "O"));
+    }
 }
