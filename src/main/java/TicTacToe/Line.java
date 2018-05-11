@@ -1,3 +1,5 @@
+package TicTacToe;
+
 import java.util.List;
 
 public class Line {
@@ -5,10 +7,6 @@ public class Line {
 
     public Line(List<String> cells) {
         this.cells = cells;
-    }
-
-    public List<String> getCells() {
-        return cells;
     }
 
     public String getCellAtPosition(int position) {
@@ -21,5 +19,9 @@ public class Line {
 
     public boolean isFull() {
         return cells.stream().allMatch(cell -> (cell == "X" || cell == "O"));
+    }
+
+    public String winningMark() {
+       return cells.stream().distinct().findFirst().get();
     }
 }
