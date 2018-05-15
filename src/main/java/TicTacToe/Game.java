@@ -1,16 +1,18 @@
 package TicTacToe;
 
-import java.io.IOException;
-
 public class Game {
     private Board board;
     private Display display;
-    private Player currentPlayer;
+    private IPlayer currentPlayer;
+    private IPlayer playerX;
+    private IPlayer playerO;
 
-    Game(Display display, Board board) {
+    Game(Display display, Board board, IPlayer playerX, IPlayer playerO) {
         this.display = display;
         this.board = board;
-        this.currentPlayer = new Player("X", display);
+        this.playerX = playerX;
+        this.playerO = playerO;
+        this.currentPlayer = playerX;
     }
 
     public void play() {
@@ -35,7 +37,7 @@ public class Game {
     public void playTurn() {
         display.announcePlayerTurn(currentPlayer.getMark());
         display.promptPickMove(currentPlayer.getMark());
-        markBoard();
+        markBoard(getMove());
         switchPlayers();
         display.printBoard(board);
     }
@@ -49,19 +51,38 @@ public class Game {
         display.printGoodbye();
     }
 
-    private void markBoard() {
-        board.mark(currentPlayer.getMark(), getMove());
+    private void markBoard(int move) {
+        board.mark(currentPlayer.getMark(), move);
     }
 
     private int getMove() {
-        return currentPlayer.getMove();
+        String input = "";
+        int move = 0;
+
+        while(!isValid(input)) {
+            input = currentPlayer.getInput();
+
+            if(isValid(input)) {
+                move = Integer.parseInt(input);
+                return move;
+            }
+
+            display.warnInvalidInput(input);
+            display.promptPickMove(currentPlayer.getMark());
+        }
+
+        return move;
+    }
+
+    private boolean isValid(String input) {
+        return board.getGridAsList().contains(input);
     }
 
     private void switchPlayers() {
-        if (currentPlayer.getMark().equals("X")) {
-            this.currentPlayer = new Player("O", display);
+        if (currentPlayer == playerX) {
+            currentPlayer = playerO;
         } else {
-            this.currentPlayer = new Player("X", display);
+            currentPlayer = playerX;
         }
     }
 }

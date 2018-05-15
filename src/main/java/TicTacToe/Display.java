@@ -48,14 +48,18 @@ public class Display {
         printStream.println("Player " + mark + ", please pick a move (number between 1 and 9):\n");
     }
 
-    public int getInput() {
+    public String getInput() {
         try {
-            String move;
-            move = inputStream.readLine();
-            return Integer.parseInt(move);
+            String input;
+            input = inputStream.readLine();
+            return (input);
         } catch(IOException e) {
-            return 0;
+            return "";
         }
+    }
+
+    public void warnInvalidInput(String input) {
+        printStream.println(input + " is not valid input.");
     }
 }
 

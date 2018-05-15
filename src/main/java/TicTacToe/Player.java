@@ -1,21 +1,21 @@
 package TicTacToe;
 
-import java.io.IOException;
-
-public class Player {
+public class Player implements IPlayer {
     private String mark;
     private Display display;
 
-    public Player(String mark, Display display) {
+    Player(String mark, Display display) {
         this.display = display;
         this.mark = mark;
     }
 
+    @Override
     public String getMark() {
         return mark;
     }
 
-    public int getMove() {
+    @Override
+    public String getInput() {
         return display.getInput();
     }
 }
