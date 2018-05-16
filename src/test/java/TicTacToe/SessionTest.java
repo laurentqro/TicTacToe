@@ -25,6 +25,9 @@ public class SessionTest {
         Game game = new Game(mockDisplay, board, playerX, playerO);
         Session session = new Session(game, mockDisplay);
 
+        playerX.setMarkChoices("a");
+        playerO.setMarkChoices("b");
+
         session.start();
 
         verify(mockDisplay).promptPlayerToCustomiseMark("X");
@@ -36,13 +39,13 @@ public class SessionTest {
         Game game = new Game(mockDisplay, board, playerX, playerO);
         Session session = new Session(game, mockDisplay);
 
-        playerX.setMarkChoice("foo");
-        playerO.setMarkChoice("bar");
+        playerX.setMarkChoices("ab");
+        playerO.setMarkChoices("cd");
 
         session.start();
 
-        assertEquals("foo", playerX.getMark());
-        assertEquals("bar", playerO.getMark());
+        assertEquals("ab", playerX.getMark());
+        assertEquals("cd", playerO.getMark());
     }
 
     @Test
@@ -54,6 +57,51 @@ public class SessionTest {
         verify(mockDisplay).printGreeting();
     }
 
+    @Test
+    public void oneIsValidInput() {
+        Board board = boardWith("X", "X", "X", "4", "5", "6", "7", "8", "9");
+        Game game = new Game(mockDisplay, board, playerX, playerO);
+        Session session = new Session(game, mockDisplay);
+
+        playerX.setMarkChoices("a");
+        playerO.setMarkChoices("b");
+
+        session.start();
+
+        assertEquals("a", playerX.getMark());
+        assertEquals("b", playerO.getMark());
+    }
+
+
+    @Test
+    public void emptyIsInvalidInput() {
+        Board board = boardWith("X", "X", "X", "4", "5", "6", "7", "8", "9");
+        Game game = new Game(mockDisplay, board, playerX, playerO);
+        Session session = new Session(game, mockDisplay);
+
+        playerX.setMarkChoices("     ", "a");
+        playerO.setMarkChoices("  ", "b");
+
+        session.start();
+
+        assertEquals("a", playerX.getMark());
+        assertEquals("b", playerO.getMark());
+    }
+
+    @Test
+    public void tooLongIsInvalidInput() {
+        Board board = boardWith("X", "X", "X", "4", "5", "6", "7", "8", "9");
+        Game game = new Game(mockDisplay, board, playerX, playerO);
+        Session session = new Session(game, mockDisplay);
+
+        playerX.setMarkChoices("foobar", "a");
+        playerO.setMarkChoices("baz", "b");
+
+        session.start();
+
+        assertEquals("a", playerX.getMark());
+        assertEquals("b", playerO.getMark());
+    }
 
     private Board boardWith(String ...marks) {
         Board board = new Board();

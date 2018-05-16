@@ -1,6 +1,7 @@
 package TicTacToe;
 
-public class Session {
+class Session {
+    private static final int MAX_MARK_LENGTH = 2;
     private Game game;
     private Display display;
 
@@ -18,7 +19,23 @@ public class Session {
 
     private void customiseMark(IPlayer player) {
         display.promptPlayerToCustomiseMark(player.getMark());
-        String markChoice = player.getMarkChoice();
-        player.setMark(markChoice);
+
+        String markChoice = "";
+        while(!isValid(markChoice)) {
+            markChoice = sanitize(player.getMarkChoice());
+            if(isValid(markChoice)) {
+                player.setMark(markChoice);
+                break;
+            }
+            display.warnInvalidInput(markChoice);
+        }
+    }
+
+    private boolean isValid(String input) {
+        return !input.isEmpty() & input.length() <= MAX_MARK_LENGTH;
+    }
+
+    private String sanitize(String input) {
+        return input.replaceAll("\\s+","");
     }
 }
