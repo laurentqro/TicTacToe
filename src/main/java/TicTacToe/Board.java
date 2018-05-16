@@ -1,3 +1,5 @@
+package TicTacToe;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -9,9 +11,10 @@ public class Board {
         this.grid = new ArrayList<>(Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9"));
     }
 
-    public void setGrid(List<String> grid) {
-        this.grid = grid;
+    public List<String> getGridAsList() {
+        return grid;
     }
+
 
     public boolean hasWin() {
         for(Line line : getLines()) {
@@ -57,7 +60,6 @@ public class Board {
 
         for(int i = 0; i < side; i++) {
             List<String> column = new ArrayList<>();
-
             for(Line row : getRows()) {
                 column.add(row.getCellAtPosition(i));
             }
@@ -88,10 +90,19 @@ public class Board {
     }
 
     private boolean isFull() {
-        return getLines().stream().allMatch(line -> line.isFull());
+        return getLines().stream().allMatch(Line::isFull);
     }
 
     private int getSide() {
         return (int)Math.sqrt(grid.size());
+    }
+
+    public void mark(String symbol, int position) {
+        grid.set(position - 1, symbol);
+    }
+
+    public String getWinner() {
+        if (!hasWin()) return "";
+        return getLines().stream().filter(Line::hasWin).findFirst().get().winningMark();
     }
 }
