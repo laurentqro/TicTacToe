@@ -18,4 +18,14 @@ public class Player implements IPlayer {
     public String getInput() {
         return display.getInput();
     }
+
+    @Override
+    public String getMarkChoice() {
+        return display.getInput();
+    }
+
+    @Override
+    public void setMark(String mark) {
+        this.mark = mark;
+    }
 }

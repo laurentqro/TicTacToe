@@ -1,11 +1,11 @@
 package TicTacToe;
 
-public class Game {
+class Game {
     private Board board;
     private Display display;
     private IPlayer currentPlayer;
-    private IPlayer playerX;
-    private IPlayer playerO;
+    IPlayer playerX;
+    IPlayer playerO;
 
     Game(Display display, Board board, IPlayer playerX, IPlayer playerO) {
         this.display = display;
@@ -15,7 +15,7 @@ public class Game {
         this.currentPlayer = playerX;
     }
 
-    public void play() {
+    void play() {
         startGame();
 
         while (!isOver()) {
@@ -25,7 +25,7 @@ public class Game {
         endGame();
     }
 
-    public boolean isOver() {
+    boolean isOver() {
         return board.hasWin() || board.hasTie();
     }
 
@@ -34,7 +34,7 @@ public class Game {
         display.printBoard(board);
     }
 
-    public void playTurn() {
+    void playTurn() {
         display.announcePlayerTurn(currentPlayer.getMark());
         display.promptPickMove(currentPlayer.getMark());
         markBoard(getMove());

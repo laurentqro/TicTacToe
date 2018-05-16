@@ -61,5 +61,9 @@ public class Display {
     public void warnInvalidInput(String input) {
         printStream.println(input + " is not valid input.");
     }
+
+    public void promptPlayerToCustomiseMark(String mark) {
+        printStream.println("Player " + mark + ", please pick a custom mark of your choice:");
+    }
 }
 

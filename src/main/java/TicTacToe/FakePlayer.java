@@ -6,6 +6,7 @@ import java.util.LinkedList;
 public class FakePlayer implements IPlayer {
     private LinkedList<String> moves;
     private String mark;
+    private String markChoice;
 
     FakePlayer(String mark) {
         this.mark = mark;
@@ -21,8 +22,21 @@ public class FakePlayer implements IPlayer {
         return moves.pop();
     }
 
-    public void setMoves(String ...inputs) {
+    void setMoves(String... inputs) {
         LinkedList<String> moves = new LinkedList<>(Arrays.asList(inputs));
         this.moves = moves;
+    }
+
+    @Override
+    public String getMarkChoice() {
+        return markChoice;
+    }
+
+    void setMarkChoice(String input) {
+        this.markChoice = input;
+    }
+
+    public void setMark(String mark) {
+        this.mark = mark;
     }
 }

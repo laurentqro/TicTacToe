@@ -43,14 +43,6 @@ public class GameTest {
     }
 
     @Test
-    public void greetsPlayers() {
-        board = boardWith("X", "X", "X", "4", "5", "6", "7", "8", "9");
-        game = new Game(mockDisplay, board, playerX, playerO);
-        game.play();
-        verify(mockDisplay).printGreeting();
-    }
-
-    @Test
     public void printsBoard() {
         board = boardWith("X", "X", "X", "4", "5", "6", "7", "8", "9");
         game = new Game(mockDisplay, board, playerX, playerO);

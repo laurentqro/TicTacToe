@@ -67,5 +67,11 @@ public class DisplayTest {
         display.promptPickMove("X");
         assertThat(outputStream.toString(), containsString("Player X, please pick a move (number between 1 and 9):\n"));
     }
+
+    @Test
+    public void promptsPlayerToCustomiseMark() {
+        display.promptPlayerToCustomiseMark("X");
+        assertThat(outputStream.toString(), containsString("Player X, please pick a custom mark of your choice:"));
+    }
 }
 
