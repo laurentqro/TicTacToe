@@ -90,7 +90,7 @@ public class GameTest {
         game = new Game(mockDisplay, board, playerX, playerO);
         playerX.setMoves("1");
         game.playTurn();
-        assertTrue(board.getGridAsList().contains("X"));
+        assert(board.getCellAtPosition(1).isMarked());
     }
 
     @Test
@@ -99,14 +99,14 @@ public class GameTest {
         playerX.setMoves("invalid input", "1");
         game = new Game(mockDisplay, board, playerX, playerO);
         game.playTurn();
-        assertFalse(board.getGridAsList().contains("invalid input"));
-        assertTrue(board.getGridAsList().contains("X"));
+        assertFalse(board.getCellAtPosition(1).getMark().equals("invalid input"));
+        assert(board.getCellAtPosition(1).isMarked());
     }
 
     private Board boardWith(String ...marks) {
         Board board = new Board();
         for (int i = 0; i < marks.length; i++) {
-            board.mark(marks[i], i + 1);
+            board.markCellAtPosition(marks[i], i + 1);
         }
         return board;
     }

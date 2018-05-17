@@ -1,5 +1,9 @@
 package tictactoe;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 class Game {
     private Board board;
     private Display display;
@@ -52,18 +56,17 @@ class Game {
     }
 
     private void markBoard(int move) {
-        board.mark(currentPlayer.getMark(), move);
+        board.markCellAtPosition(currentPlayer.getMark(), move);
     }
 
     private int getMove() {
         String input = "";
-        int move = 0;
 
         while(!isValid(input)) {
             input = currentPlayer.getInput();
 
             if(isValid(input)) {
-                move = Integer.parseInt(input);
+                int move = Integer.parseInt(input);
                 return move;
             }
 
@@ -71,11 +74,18 @@ class Game {
             display.promptPickMove(currentPlayer.getMark());
         }
 
-        return move;
+        return 0;
     }
 
     private boolean isValid(String input) {
-        return board.getGridAsList().contains(input);
+        List<String> acceptedInputs = new ArrayList<>(Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9"));
+        if(!acceptedInputs.contains(input)) {
+            return false;
+        } else {
+            int position = Integer.parseInt(input);
+            Cell chosenCell = board.getCellAtPosition(position);
+            return !chosenCell.isMarked();
+        }
     }
 
     private void switchPlayers() {

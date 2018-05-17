@@ -106,7 +106,7 @@ public class SessionTest {
     private Board boardWith(String ...marks) {
         Board board = new Board();
         for (int i = 0; i < marks.length; i++) {
-            board.mark(marks[i], i + 1);
+            board.markCellAtPosition(marks[i], i + 1);
         }
         return board;
     }

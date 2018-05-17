@@ -1,8 +1,8 @@
 package tictactoe;
 
 public class Player implements IPlayer {
-    private String mark;
-    private Display display;
+   private Display display;
+   private String mark;
 
     Player(String mark, Display display) {
         this.display = display;

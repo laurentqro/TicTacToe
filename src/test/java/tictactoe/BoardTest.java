@@ -60,7 +60,7 @@ public class BoardTest {
 
     @Test
     public void boardHasTie() {
-        Board board = boardWith("X", "O", "X", "O", "O", "X", "X", "X", "O");
+        Board board = boardWith("a", "O", "a", "O", "O", "a", "a", "a", "O");
         assertTrue(board.hasTie());
     }
 
@@ -79,7 +79,7 @@ public class BoardTest {
     private Board boardWith(String ...marks) {
         Board board = new Board();
         for (int i = 0; i < marks.length; i++) {
-            board.mark(marks[i], i + 1);
+            board.markCellAtPosition(marks[i], i + 1);
         }
         return board;
     }

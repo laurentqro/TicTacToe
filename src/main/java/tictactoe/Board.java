@@ -5,13 +5,13 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Board {
-    private List<String> grid;
+    private List<Cell> grid;
 
     public Board() {
-        this.grid = new ArrayList<>(Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9"));
+        this.grid = new ArrayList<>(Arrays.asList(new Cell(), new Cell(), new Cell(), new Cell(), new Cell(), new Cell(), new Cell(), new Cell(), new Cell()));
     }
 
-    public List<String> getGridAsList() {
+    public List<Cell> getGridAsList() {
         return grid;
     }
 
@@ -45,7 +45,7 @@ public class Board {
         List<Line> rows = new ArrayList<>();
 
         for(int i = 0; i < grid.size(); i += side) {
-            List<String> cells = grid.subList(i, i + side);
+            List<Cell> cells = grid.subList(i, i + side);
             rows.add(new Line(cells));
         }
 
@@ -59,7 +59,7 @@ public class Board {
         int side = getSide();
 
         for(int i = 0; i < side; i++) {
-            List<String> column = new ArrayList<>();
+            List<Cell> column = new ArrayList<>();
             for(Line row : getRows()) {
                 column.add(row.getCellAtPosition(i));
             }
@@ -72,8 +72,8 @@ public class Board {
 
     private List<Line> getDiagonals() {
         List<Line> diagonals = new ArrayList<>();
-        List<String> leftDiagonal = new ArrayList<>();
-        List<String> rightDiagonal = new ArrayList<>();
+        List<Cell> leftDiagonal = new ArrayList<>();
+        List<Cell> rightDiagonal = new ArrayList<>();
 
         int side = getSide();
         int counter = side - 1;
@@ -97,12 +97,18 @@ public class Board {
         return (int)Math.sqrt(grid.size());
     }
 
-    public void mark(String symbol, int position) {
-        grid.set(position - 1, symbol);
+    public void markCellAtPosition(String mark, int position) {
+        System.out.println(position);
+        Cell cell = grid.get(position - 1);
+        cell.setMark(mark);
     }
 
     public String getWinner() {
-        if (!hasWin()) return "";
+        if(!hasWin()) { return ""; }
         return getLines().stream().filter(Line::hasWin).findFirst().get().winningMark();
+    }
+
+    public Cell getCellAtPosition(int position) {
+        return grid.get(position - 1);
     }
 }
