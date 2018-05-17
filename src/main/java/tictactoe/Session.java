@@ -1,4 +1,4 @@
-package TicTacToe;
+package tictactoe;
 
 class Session {
     private static final int MAX_MARK_LENGTH = 2;

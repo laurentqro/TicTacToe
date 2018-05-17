@@ -1,4 +1,4 @@
-package TicTacToe;
+package tictactoe;
 
 public interface IPlayer {
     String getInput();

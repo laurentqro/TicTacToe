@@ -1,4 +1,4 @@
-package TicTacToe;
+package tictactoe;
 
 import java.util.Arrays;
 import java.util.LinkedList;

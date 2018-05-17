@@ -1,4 +1,4 @@
-package TicTacToe;
+package tictactoe;
 
 class Game {
     private Board board;
