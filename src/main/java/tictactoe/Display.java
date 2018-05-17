@@ -1,4 +1,4 @@
-package TicTacToe;
+package tictactoe;
 
 import java.io.*;
 import java.util.List;
@@ -19,11 +19,11 @@ public class Display {
     }
 
     public void printBoard(Board board) {
-        List<String> grid = board.getGridAsList();
+        List<Cell> cells = board.getGridAsList();
 
-        String string = grid.get(0) + " | " + grid.get(1) + " | " + grid.get(2) + "\n"
-                + grid.get(3) + " | " + grid.get(4) + " | " + grid.get(5) + "\n"
-                + grid.get(6) + " | " + grid.get(7) + " | " + grid.get(8) + "\n";
+        String string = cells.get(0).getMark() + " | " + cells.get(1).getMark() + " | " + cells.get(2).getMark() + "\n"
+                      + cells.get(3).getMark() + " | " + cells.get(4).getMark() + " | " + cells.get(5).getMark() + "\n"
+                      + cells.get(6).getMark() + " | " + cells.get(7).getMark() + " | " + cells.get(8).getMark() + "\n";
 
         printStream.println(string);
     }
@@ -60,6 +60,10 @@ public class Display {
 
     public void warnInvalidInput(String input) {
         printStream.println(input + " is not valid input.");
+    }
+
+    public void promptPlayerToCustomiseMark(String mark) {
+        printStream.println("Player " + mark + ", please pick a custom mark of your choice:");
     }
 }
 

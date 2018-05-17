@@ -1,8 +1,8 @@
-package TicTacToe;
+package tictactoe;
 
 public class Player implements IPlayer {
-    private String mark;
-    private Display display;
+   private Display display;
+   private String mark;
 
     Player(String mark, Display display) {
         this.display = display;
@@ -17,5 +17,15 @@ public class Player implements IPlayer {
     @Override
     public String getInput() {
         return display.getInput();
+    }
+
+    @Override
+    public String getMarkChoice() {
+        return display.getInput();
+    }
+
+    @Override
+    public void setMark(String mark) {
+        this.mark = mark;
     }
 }

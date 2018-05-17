@@ -3,7 +3,7 @@ plugins {
     id 'application'
 }
 
-mainClassName = 'TicTacToe.Main'
+mainClassName = 'tictactoe.Main'
 
 dependencies {
     compile 'com.google.guava:guava:23.0'

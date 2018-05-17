@@ -1,10 +1,11 @@
-package TicTacToe;
+package tictactoe;
 
 import java.util.Arrays;
 import java.util.LinkedList;
 
 public class FakePlayer implements IPlayer {
     private LinkedList<String> moves;
+    private LinkedList<String> markChoices;
     private String mark;
 
     FakePlayer(String mark) {
@@ -21,8 +22,22 @@ public class FakePlayer implements IPlayer {
         return moves.pop();
     }
 
-    public void setMoves(String ...inputs) {
+    void setMoves(String... inputs) {
         LinkedList<String> moves = new LinkedList<>(Arrays.asList(inputs));
         this.moves = moves;
+    }
+
+    @Override
+    public String getMarkChoice() {
+        return markChoices.pop();
+    }
+
+    void setMarkChoices(String... inputs) {
+        LinkedList<String> choices = new LinkedList<>(Arrays.asList(inputs));
+        this.markChoices = choices;
+    }
+
+    public void setMark(String mark) {
+        this.mark = mark;
     }
 }

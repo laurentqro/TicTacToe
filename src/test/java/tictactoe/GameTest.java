@@ -1,11 +1,12 @@
-package TicTacToe;
-
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+package tictactoe;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 public class GameTest {
     private Display mockDisplay;
@@ -40,14 +41,6 @@ public class GameTest {
         board = boardWith("X", "O", "X", "O", "O", "X", "X", "X", "O");
         game = new Game(mockDisplay, board, playerX, playerO);
         assertTrue(game.isOver());
-    }
-
-    @Test
-    public void greetsPlayers() {
-        board = boardWith("X", "X", "X", "4", "5", "6", "7", "8", "9");
-        game = new Game(mockDisplay, board, playerX, playerO);
-        game.play();
-        verify(mockDisplay).printGreeting();
     }
 
     @Test
@@ -97,7 +90,7 @@ public class GameTest {
         game = new Game(mockDisplay, board, playerX, playerO);
         playerX.setMoves("1");
         game.playTurn();
-        assertTrue(board.getGridAsList().contains("X"));
+        assert(board.getCellAtPosition(1).isMarked());
     }
 
     @Test
@@ -106,14 +99,14 @@ public class GameTest {
         playerX.setMoves("invalid input", "1");
         game = new Game(mockDisplay, board, playerX, playerO);
         game.playTurn();
-        assertFalse(board.getGridAsList().contains("invalid input"));
-        assertTrue(board.getGridAsList().contains("X"));
+        assertFalse(board.getCellAtPosition(1).getMark().equals("invalid input"));
+        assert(board.getCellAtPosition(1).isMarked());
     }
 
     private Board boardWith(String ...marks) {
         Board board = new Board();
         for (int i = 0; i < marks.length; i++) {
-            board.mark(marks[i], i + 1);
+            board.markCellAtPosition(marks[i], i + 1);
         }
         return board;
     }

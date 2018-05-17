@@ -1,4 +1,4 @@
-package TicTacToe;
+package tictactoe;
 
 public class Main {
 
@@ -7,8 +7,9 @@ public class Main {
         Board board = new Board();
         Player playerX = new Player("X", display);
         Player playerO = new Player("O", display);
-
         Game game = new Game(display, board, playerX, playerO);
-        game.play();
+        Session session = new Session(game, display);
+
+        session.start();
     }
 }
