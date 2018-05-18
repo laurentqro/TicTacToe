@@ -51,18 +51,18 @@ class Game {
         display.printGoodbye();
     }
 
-    private void markBoard(int move) {
+    private void markBoard(String input) {
         try {
-            board.markCellAtPosition(currentPlayer.getMark(), move);
+            board.markCellAtPosition(currentPlayer.getMark(), input);
         } catch(InvalidInputException e) {
             display.print(e.getMessage());
             getMove();
         }
     }
 
-    private int getMove() {
+    private String getMove() {
         try {
-            return Integer.parseInt(currentPlayer.getMove());
+            return currentPlayer.getMove();
         } catch(InvalidInputException e) {
             display.print(e.getMessage());
             return getMove();

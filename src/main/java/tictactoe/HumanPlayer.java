@@ -1,15 +1,11 @@
 package tictactoe;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class HumanPlayer extends Player {
-    private String mark;
     private Display display;
 
     HumanPlayer(String mark, Display display) {
+        super(mark);
         this.display = display;
-        this.mark = mark;
     }
 
     @Override
@@ -18,17 +14,7 @@ public class HumanPlayer extends Player {
     }
 
     @Override
-    public void setMark(String mark) {
-        this.mark = mark;
-    }
-
-    @Override
-    public String getMove() throws InvalidInputException {
-        return display.getMove();
-    }
-
-    @Override
-    public String getMarkChoice() throws InvalidInputException {
-        return display.getMarkChoice();
+    public String getMove() {
+        return display.getInput()
     }
 }

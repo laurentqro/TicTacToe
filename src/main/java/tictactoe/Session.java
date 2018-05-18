@@ -11,22 +11,15 @@ class Session {
 
     void start() {
         display.printGreeting();
-        String markX = chooseMark(game.playerX);
+
+        display.promptPlayerToCustomiseMark(game.playerX.getMark());
+        String markX = display.getInput();
         game.playerX.setMark(markX);
 
-        String markO = chooseMark(game.playerO);
+        display.promptPlayerToCustomiseMark(game.playerO.getMark());
+        String markO = display.getInput();
         game.playerO.setMark(markO);
 
         game.play();
-    }
-
-    private String chooseMark(Player player) {
-        display.promptPlayerToCustomiseMark(player.getMark());
-        try {
-            return player.getMarkChoice();
-        } catch(InvalidInputException e) {
-            display.print(e.getMessage());
-            return chooseMark(player);
-        }
     }
 }

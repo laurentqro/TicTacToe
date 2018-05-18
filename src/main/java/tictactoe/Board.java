@@ -15,7 +15,6 @@ public class Board {
         return grid;
     }
 
-
     public boolean hasWin() {
         for(Line line : getLines()) {
             if (line.hasWin()) {
@@ -97,9 +96,14 @@ public class Board {
         return (int)Math.sqrt(grid.size());
     }
 
-    public void markCellAtPosition(String mark, int position) throws InvalidInputException {
-        Cell cell = grid.get(position - 1);
-        cell.setMark(mark);
+    public void markCellAtPosition(String mark, String input) {
+        if(isValidInput(input)) {
+            int position = Integer.parseInt(input);
+            Cell cell = grid.get(position - 1);
+            cell.setMark(mark);
+        } else {
+            throw new InvalidInputException("Invalid input, please enter a number between 1 and 9.");
+        }
     }
 
     public String getWinner() {
@@ -109,5 +113,10 @@ public class Board {
 
     public Cell getCellAtPosition(int position) {
         return grid.get(position - 1);
+    }
+
+    public static boolean isValidInput(String input) {
+        List<String> acceptedInputs = new ArrayList<>(Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9"));
+        return acceptedInputs.contains(input);
     }
 }

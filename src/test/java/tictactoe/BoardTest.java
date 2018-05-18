@@ -80,8 +80,9 @@ public class BoardTest {
     private Board boardWith(String ...marks) {
         Board board = new Board();
         for (int i = 0; i < marks.length; i++) {
+            String position = Integer.toString(i + 1);
             try {
-                board.markCellAtPosition(marks[i], i + 1);
+                board.markCellAtPosition(marks[i], position);
             } catch(InvalidInputException e) {
                 System.out.println(e.getMessage());
             }

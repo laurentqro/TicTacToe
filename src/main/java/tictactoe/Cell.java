@@ -22,7 +22,7 @@ public class Cell {
         }
     }
 
-    public void setMark(String mark) throws InvalidInputException {
+    public void setMark(String mark) {
         if(isMarked()) {
             throw new InvalidInputException("This position is already taken, please choose an available position.");
         } else {
