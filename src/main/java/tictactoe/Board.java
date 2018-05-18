@@ -8,7 +8,7 @@ public class Board {
     private List<Cell> grid;
 
     public Board() {
-        this.grid = new ArrayList<>(Arrays.asList(new Cell(), new Cell(), new Cell(), new Cell(), new Cell(), new Cell(), new Cell(), new Cell(), new Cell()));
+        this.grid = new ArrayList<>(Arrays.asList(new Cell(1), new Cell(2), new Cell(3), new Cell(4), new Cell(5), new Cell(6), new Cell(7), new Cell(8), new Cell(9)));
     }
 
     public List<Cell> getGridAsList() {

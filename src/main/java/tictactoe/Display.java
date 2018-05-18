@@ -21,9 +21,9 @@ public class Display {
     public void printBoard(Board board) {
         List<Cell> cells = board.getGridAsList();
 
-        String string = cells.get(0).getMark() + " | " + cells.get(1).getMark() + " | " + cells.get(2).getMark() + "\n"
-                      + cells.get(3).getMark() + " | " + cells.get(4).getMark() + " | " + cells.get(5).getMark() + "\n"
-                      + cells.get(6).getMark() + " | " + cells.get(7).getMark() + " | " + cells.get(8).getMark() + "\n";
+        String string = cells.get(0).toString() + " | " + cells.get(1).toString() + " | " + cells.get(2).toString() + "\n"
+                      + cells.get(3).toString() + " | " + cells.get(4).toString() + " | " + cells.get(5).toString() + "\n"
+                      + cells.get(6).toString() + " | " + cells.get(7).toString() + " | " + cells.get(8).toString() + "\n";
 
         printStream.println(string);
     }
