@@ -3,11 +3,11 @@ package tictactoe;
 class Game {
     private Board board;
     private Display display;
-    private IPlayer currentPlayer;
-    IPlayer playerX;
-    IPlayer playerO;
+    private Player currentPlayer;
+    Player playerX;
+    Player playerO;
 
-    Game(Display display, Board board, IPlayer playerX, IPlayer playerO) {
+    Game(Display display, Board board, Player playerX, Player playerO) {
         this.display = display;
         this.board = board;
         this.playerX = playerX;

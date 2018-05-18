@@ -2,9 +2,8 @@ package tictactoe;
 
 import java.util.Arrays;
 import java.util.LinkedList;
-import java.util.List;
 
-public class FakePlayer implements IPlayer {
+public class FakePlayer extends Player {
     private LinkedList<String> moves;
     private LinkedList<String> markChoices;
     private String mark;
@@ -16,10 +15,6 @@ public class FakePlayer implements IPlayer {
     @Override
     public String getMark() {
         return mark;
-    }
-
-    public List<String> getMarkChoices() {
-        return this.markChoices;
     }
 
     @Override

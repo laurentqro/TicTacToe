@@ -20,7 +20,7 @@ class Session {
         game.play();
     }
 
-    private String chooseMark(IPlayer player) {
+    private String chooseMark(Player player) {
         display.promptPlayerToCustomiseMark(player.getMark());
         try {
             return player.getMarkChoice();
