@@ -98,7 +98,6 @@ public class Board {
     }
 
     public void markCellAtPosition(String mark, int position) {
-        System.out.println(position);
         Cell cell = grid.get(position - 1);
         cell.setMark(mark);
     }
