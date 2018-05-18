@@ -1,6 +1,8 @@
 package tictactoe;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Display {
@@ -48,22 +50,55 @@ public class Display {
         printStream.println("Player " + mark + ", please pick a move (number between 1 and 9):\n");
     }
 
-    public String getInput() {
+    public void promptPlayerToCustomiseMark(String mark) {
+        printStream.println("Player " + mark + ", please pick a custom mark of your choice:");
+    }
+
+    public String getMarkChoice() throws InvalidInputException {
         try {
             String input;
             input = inputStream.readLine();
-            return (input);
+
+            if (isValidMark(input)) {
+                return sanitize(input);
+            } else {
+                throw new InvalidInputException("Invalid input, please choose an emoji or mark no longer than two characters.");
+            }
         } catch(IOException e) {
             return "";
         }
     }
 
-    public void warnInvalidInput(String input) {
-        printStream.println(input + " is not valid input.");
+    private boolean isValidMark(String input) {
+        return !input.isEmpty() & input.length() <= Cell.MAX_MARK_LENGTH;
     }
 
-    public void promptPlayerToCustomiseMark(String mark) {
-        printStream.println("Player " + mark + ", please pick a custom mark of your choice:");
+    private String sanitize(String input) {
+        return input.replaceAll("\\s+","");
+    }
+
+    public String getMove() throws InvalidInputException {
+        String input = "";
+        try {
+            input = inputStream.readLine();
+
+            if (isValidMove(input)) {
+                return input;
+            } else {
+                throw new InvalidInputException("Invalid input, please enter a number between 1 and 9.");
+            }
+        } catch(IOException e) {
+            return "";
+        }
+    }
+
+    private boolean isValidMove(String input) {
+        List<String> acceptedInputs = new ArrayList<>(Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9"));
+        return acceptedInputs.contains(input);
+    }
+
+    public void print(String message) {
+        printStream.println(message);
     }
 }
 

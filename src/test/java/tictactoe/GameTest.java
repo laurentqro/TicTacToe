@@ -103,10 +103,15 @@ public class GameTest {
         assert(board.getCellAtPosition(1).isMarked());
     }
 
+
     private Board boardWith(String ...marks) {
         Board board = new Board();
         for (int i = 0; i < marks.length; i++) {
-            board.markCellAtPosition(marks[i], i + 1);
+            try {
+                board.markCellAtPosition(marks[i], i + 1);
+            } catch(InvalidInputException e) {
+                System.out.println(e.getMessage());
+            }
         }
         return board;
     }

@@ -1,6 +1,7 @@
 package tictactoe;
 
 public class Cell {
+    public static final int MAX_MARK_LENGTH = 2;
     private String mark;
     private int position;
 
@@ -21,8 +22,12 @@ public class Cell {
         }
     }
 
-    public void setMark(String mark) {
-        this.mark = mark;
+    public void setMark(String mark) throws InvalidInputException {
+        if(isMarked()) {
+            throw new InvalidInputException("This position is already taken, please choose an available position.");
+        } else {
+            this.mark = mark;
+        }
     }
 
     public boolean isMarked() {

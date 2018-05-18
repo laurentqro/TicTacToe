@@ -97,7 +97,7 @@ public class Board {
         return (int)Math.sqrt(grid.size());
     }
 
-    public void markCellAtPosition(String mark, int position) {
+    public void markCellAtPosition(String mark, int position) throws InvalidInputException {
         Cell cell = grid.get(position - 1);
         cell.setMark(mark);
     }
