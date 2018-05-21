@@ -5,14 +5,19 @@ import java.util.LinkedList;
 
 public class FakePlayer extends Player {
     private LinkedList<String> choices;
+    private LinkedList<Integer> moves;
 
     FakePlayer(String mark) {
         super(mark);
     }
 
-    @Override
     public String getInput() {
         return choices.pop();
+    }
+
+    @Override
+    public int getMove(Game game) {
+        return moves.pop();
     }
 
     public void setChoices(String... inputs) {

@@ -52,6 +52,14 @@ public class Display {
         printStream.println("Player " + mark + ", please pick a custom mark of your choice:");
     }
 
+    public int getMove() {
+        try {
+            return Integer.parseInt(inputStream.readLine());
+        } catch (IOException e) {
+            return 0;
+        }
+    }
+
     public String getInput() {
         try {
             return inputStream.readLine();

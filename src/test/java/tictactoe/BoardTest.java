@@ -1,6 +1,10 @@
 package tictactoe;
 
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public class BoardTest {
@@ -74,6 +78,13 @@ public class BoardTest {
     public void boardHasWinner() {
         Board board = boardWith("X", "X", "X", "4", "5", "6", "7", "8", "9");
         assertEquals("X", board.getWinner());
+    }
+
+    @Test
+    public void returnsAvailableMoves() {
+        Board board = boardWith("X", "X", "X", "4", "5", "6", "7", "8", "9");
+        String[] expecteds = new ArrayList<>("4", "5", "6", "7", "8", "9");
+        assertArrayEquals(expecteds, board.getAvailableMoves());
     }
 
 

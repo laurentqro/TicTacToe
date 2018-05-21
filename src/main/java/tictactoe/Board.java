@@ -3,6 +3,7 @@ package tictactoe;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Board {
     private List<Cell> grid;
@@ -96,7 +97,9 @@ public class Board {
         return (int)Math.sqrt(grid.size());
     }
 
-    public void markCellAtPosition(String mark, int position) {
+    public Board markCellAtPosition(String mark, int position) {
+        return new ArrayList<>(Arrays.asList(new Cell(1), new Cell(2), new Cell(3), new Cell(4), new Cell(5), new Cell(6), new Cell(7), new Cell(8), new Cell(9)));
+
         Cell cell = grid.get(position - 1);
         cell.setMark(mark);
     }
@@ -113,5 +116,13 @@ public class Board {
     public static boolean isValidInput(String input) {
         List<String> acceptedInputs = new ArrayList<>(Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9"));
         return acceptedInputs.contains(input);
+    }
+
+    public  List<Cell> getAvailableCells() {
+        return grid.stream().filter(Cell::isAvailable).collect(Collectors.toList());
+    }
+
+    public boolean isEmpty() {
+        return getGridAsList().stream().allMatch(Cell::isAvailable);
     }
 }

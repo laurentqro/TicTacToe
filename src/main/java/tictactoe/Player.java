@@ -9,10 +9,8 @@ public abstract class Player {
     }
 
     String getMark() {
-        return  this.mark;
+        return this.mark;
     }
-
-    public abstract String getInput();
 
     void setMark(String mark) {
         if (isValidMark(mark)) {
@@ -26,4 +24,7 @@ public abstract class Player {
         return !input.isEmpty() & input.length() <= MAX_MARK_LENGTH;
     }
 
+    public abstract int getMove(Game game);
+
+    public abstract String getInput();
 }
