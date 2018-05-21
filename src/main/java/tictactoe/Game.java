@@ -1,17 +1,13 @@
 package tictactoe;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 class Game {
     private Board board;
     private Display display;
-    private IPlayer currentPlayer;
-    IPlayer playerX;
-    IPlayer playerO;
+    private Player currentPlayer;
+    Player playerX;
+    Player playerO;
 
-    Game(Display display, Board board, IPlayer playerX, IPlayer playerO) {
+    Game(Display display, Board board, Player playerX, Player playerO) {
         this.display = display;
         this.board = board;
         this.playerX = playerX;
@@ -55,36 +51,21 @@ class Game {
         display.printGoodbye();
     }
 
-    private void markBoard(int move) {
-        board.markCellAtPosition(currentPlayer.getMark(), move);
-    }
-
-    private int getMove() {
-        String input = "";
-
-        while(!isValid(input)) {
-            input = currentPlayer.getInput();
-
-            if(isValid(input)) {
-                int move = Integer.parseInt(input);
-                return move;
-            }
-
-            display.warnInvalidInput(input);
-            display.promptPickMove(currentPlayer.getMark());
+    private void markBoard(String input) {
+        try {
+            board.markCellAtPosition(currentPlayer.getMark(), input);
+        } catch(InvalidInputException e) {
+            display.print(e.getMessage());
+            getMove();
         }
-
-        return 0;
     }
 
-    private boolean isValid(String input) {
-        List<String> acceptedInputs = new ArrayList<>(Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9"));
-        if(!acceptedInputs.contains(input)) {
-            return false;
-        } else {
-            int position = Integer.parseInt(input);
-            Cell chosenCell = board.getCellAtPosition(position);
-            return !chosenCell.isMarked();
+    private String getMove() {
+        try {
+            return currentPlayer.getInput();
+        } catch(InvalidInputException e) {
+            display.print(e.getMessage());
+            return getMove();
         }
     }
 

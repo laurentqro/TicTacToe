@@ -79,7 +79,7 @@ public class GameTest {
     public void announcesPlayerTurn() {
         Board board = new Board();
         game = new Game(mockDisplay, board, playerX, playerO);
-        playerX.setMoves("1");
+        playerX.setChoices("1");
         game.playTurn();
         verify(mockDisplay).announcePlayerTurn("X");
     }
@@ -88,25 +88,20 @@ public class GameTest {
     public void marksBoard() {
         Board board = new Board();
         game = new Game(mockDisplay, board, playerX, playerO);
-        playerX.setMoves("1");
+        playerX.setChoices("1");
         game.playTurn();
-        assert(board.getCellAtPosition(1).isMarked());
-    }
-
-    @Test
-    public void validatesUserInput() {
-        Board board = new Board();
-        playerX.setMoves("invalid input", "1");
-        game = new Game(mockDisplay, board, playerX, playerO);
-        game.playTurn();
-        assertFalse(board.getCellAtPosition(1).getMark().equals("invalid input"));
         assert(board.getCellAtPosition(1).isMarked());
     }
 
     private Board boardWith(String ...marks) {
         Board board = new Board();
         for (int i = 0; i < marks.length; i++) {
-            board.markCellAtPosition(marks[i], i + 1);
+            String position = Integer.toString(i + 1);
+            try {
+                board.markCellAtPosition(marks[i], position);
+            } catch(InvalidInputException e) {
+                System.out.println(e.getMessage());
+            }
         }
         return board;
     }

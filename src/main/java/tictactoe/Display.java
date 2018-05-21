@@ -48,22 +48,20 @@ public class Display {
         printStream.println("Player " + mark + ", please pick a move (number between 1 and 9):\n");
     }
 
+    public void promptPlayerToCustomiseMark(String mark) {
+        printStream.println("Player " + mark + ", please pick a custom mark of your choice:");
+    }
+
     public String getInput() {
         try {
-            String input;
-            input = inputStream.readLine();
-            return (input);
-        } catch(IOException e) {
+            return inputStream.readLine();
+        } catch (IOException e) {
             return "";
         }
     }
 
-    public void warnInvalidInput(String input) {
-        printStream.println(input + " is not valid input.");
-    }
-
-    public void promptPlayerToCustomiseMark(String mark) {
-        printStream.println("Player " + mark + ", please pick a custom mark of your choice:");
+    public void print(String message) {
+        printStream.println(message);
     }
 }
 

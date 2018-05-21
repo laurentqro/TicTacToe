@@ -25,8 +25,8 @@ public class SessionTest {
         Game game = new Game(mockDisplay, board, playerX, playerO);
         Session session = new Session(game, mockDisplay);
 
-        playerX.setMarkChoices("a");
-        playerO.setMarkChoices("b");
+        playerX.setChoices("a");
+        playerO.setChoices("b");
 
         session.start();
 
@@ -39,8 +39,8 @@ public class SessionTest {
         Game game = new Game(mockDisplay, board, playerX, playerO);
         Session session = new Session(game, mockDisplay);
 
-        playerX.setMarkChoices("ab");
-        playerO.setMarkChoices("cd");
+        playerX.setChoices("ab");
+        playerO.setChoices("cd");
 
         session.start();
 
@@ -63,39 +63,8 @@ public class SessionTest {
         Game game = new Game(mockDisplay, board, playerX, playerO);
         Session session = new Session(game, mockDisplay);
 
-        playerX.setMarkChoices("a");
-        playerO.setMarkChoices("b");
-
-        session.start();
-
-        assertEquals("a", playerX.getMark());
-        assertEquals("b", playerO.getMark());
-    }
-
-
-    @Test
-    public void emptyIsInvalidInput() {
-        Board board = boardWith("X", "X", "X", "4", "5", "6", "7", "8", "9");
-        Game game = new Game(mockDisplay, board, playerX, playerO);
-        Session session = new Session(game, mockDisplay);
-
-        playerX.setMarkChoices("     ", "a");
-        playerO.setMarkChoices("  ", "b");
-
-        session.start();
-
-        assertEquals("a", playerX.getMark());
-        assertEquals("b", playerO.getMark());
-    }
-
-    @Test
-    public void tooLongIsInvalidInput() {
-        Board board = boardWith("X", "X", "X", "4", "5", "6", "7", "8", "9");
-        Game game = new Game(mockDisplay, board, playerX, playerO);
-        Session session = new Session(game, mockDisplay);
-
-        playerX.setMarkChoices("foobar", "a");
-        playerO.setMarkChoices("baz", "b");
+        playerX.setChoices("a");
+        playerO.setChoices("b");
 
         session.start();
 
@@ -105,8 +74,14 @@ public class SessionTest {
 
     private Board boardWith(String ...marks) {
         Board board = new Board();
+
         for (int i = 0; i < marks.length; i++) {
-            board.markCellAtPosition(marks[i], i + 1);
+            String position = Integer.toString(i + 1);
+            try {
+                board.markCellAtPosition(marks[i], position);
+            } catch(InvalidInputException e) {
+                System.out.println(e.getMessage());
+            }
         }
         return board;
     }
