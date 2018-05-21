@@ -9,11 +9,6 @@ public class HumanPlayer extends Player {
     }
 
     @Override
-    public String getMark() {
-        return mark;
-    }
-
-    @Override
     public String getInput() {
         return display.getInput();
     }
