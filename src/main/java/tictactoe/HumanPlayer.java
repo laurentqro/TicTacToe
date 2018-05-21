@@ -14,7 +14,7 @@ public class HumanPlayer extends Player {
     }
 
     @Override
-    public String getMove() {
-        return display.getInput()
+    public String getInput() {
+        return display.getInput();
     }
 }

@@ -25,8 +25,8 @@ public class SessionTest {
         Game game = new Game(mockDisplay, board, playerX, playerO);
         Session session = new Session(game, mockDisplay);
 
-        playerX.setMarkChoices("a");
-        playerO.setMarkChoices("b");
+        playerX.setChoices("a");
+        playerO.setChoices("b");
 
         session.start();
 
@@ -39,8 +39,8 @@ public class SessionTest {
         Game game = new Game(mockDisplay, board, playerX, playerO);
         Session session = new Session(game, mockDisplay);
 
-        playerX.setMarkChoices("ab");
-        playerO.setMarkChoices("cd");
+        playerX.setChoices("ab");
+        playerO.setChoices("cd");
 
         session.start();
 
@@ -63,8 +63,8 @@ public class SessionTest {
         Game game = new Game(mockDisplay, board, playerX, playerO);
         Session session = new Session(game, mockDisplay);
 
-        playerX.setMarkChoices("a");
-        playerO.setMarkChoices("b");
+        playerX.setChoices("a");
+        playerO.setChoices("b");
 
         session.start();
 

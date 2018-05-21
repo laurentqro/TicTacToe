@@ -62,7 +62,7 @@ class Game {
 
     private String getMove() {
         try {
-            return currentPlayer.getMove();
+            return currentPlayer.getInput();
         } catch(InvalidInputException e) {
             display.print(e.getMessage());
             return getMove();
