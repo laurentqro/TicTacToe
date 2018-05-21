@@ -79,7 +79,7 @@ public class GameTest {
     public void announcesPlayerTurn() {
         Board board = new Board();
         game = new Game(mockDisplay, board, playerX, playerO);
-        playerX.setMoves("1");
+        playerX.setChoices("1");
         game.playTurn();
         verify(mockDisplay).announcePlayerTurn("X");
     }
@@ -88,7 +88,7 @@ public class GameTest {
     public void marksBoard() {
         Board board = new Board();
         game = new Game(mockDisplay, board, playerX, playerO);
-        playerX.setMoves("1");
+        playerX.setChoices("1");
         game.playTurn();
         assert(board.getCellAtPosition(1).isMarked());
     }
