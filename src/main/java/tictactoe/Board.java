@@ -96,14 +96,9 @@ public class Board {
         return (int)Math.sqrt(grid.size());
     }
 
-    public void markCellAtPosition(String mark, String input) {
-        if(isValidInput(input)) {
-            int position = Integer.parseInt(input);
-            Cell cell = grid.get(position - 1);
-            cell.setMark(mark);
-        } else {
-            throw new InvalidInputException("Invalid input, please enter a number between 1 and 9.");
-        }
+    public void markCellAtPosition(String mark, int position) {
+        Cell cell = grid.get(position - 1);
+        cell.setMark(mark);
     }
 
     public String getWinner() {

@@ -76,7 +76,7 @@ public class SessionTest {
         Board board = new Board();
 
         for (int i = 0; i < marks.length; i++) {
-            String position = Integer.toString(i + 1);
+            int position = i + 1;
             try {
                 board.markCellAtPosition(marks[i], position);
             } catch(InvalidInputException e) {
