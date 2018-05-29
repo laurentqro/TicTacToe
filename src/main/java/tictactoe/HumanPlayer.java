@@ -8,8 +8,11 @@ public class HumanPlayer extends Player {
         this.display = display;
     }
 
-    @Override
     public String getInput() {
         return display.getInput();
+    }
+
+    public int getMove(Game game) {
+        return display.getMove();
     }
 }

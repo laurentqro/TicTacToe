@@ -1,8 +1,9 @@
 package tictactoe;
 
 class Game {
-    private Board board;
+    public Board board;
     private Display display;
+
     private Player currentPlayer;
     Player playerX;
     Player playerO;
@@ -13,6 +14,22 @@ class Game {
         this.playerX = playerX;
         this.playerO = playerO;
         this.currentPlayer = playerX;
+    }
+
+    public Board getBoard() {
+        return board;
+    }
+
+    public Player getPlayerX() {
+        return playerX;
+    }
+
+    public Player getPlayerO() {
+        return playerO;
+    }
+
+    public Player getCurrentPlayer() {
+        return currentPlayer;
     }
 
     void play() {
@@ -37,7 +54,7 @@ class Game {
     void playTurn() {
         display.announcePlayerTurn(currentPlayer.getMark());
         display.promptPickMove(currentPlayer.getMark());
-        markBoard(getMove());
+        markBoard(getMove(this));
         switchPlayers();
         display.printBoard(board);
     }
@@ -55,8 +72,8 @@ class Game {
         board.markCellAtPosition(currentPlayer.getMark(), position);
     }
 
-    private int getMove() {
-        return Integer.parseInt(currentPlayer.getInput());
+    private int getMove(Game game) {
+        return currentPlayer.getMove(game);
     }
 
     private void switchPlayers() {

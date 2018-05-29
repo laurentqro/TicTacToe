@@ -1,13 +1,16 @@
 package tictactoe;
 
 public class Cell {
-    public static final int MAX_MARK_LENGTH = 2;
     private String mark;
     private int position;
 
     public Cell(int position) {
         this.position = position;
         this.mark = null;
+    }
+
+    public int getPosition() {
+        return position;
     }
 
     public String getMark() {
@@ -33,4 +36,6 @@ public class Cell {
     public boolean isMarked() {
         return mark != null;
     }
+
+    public boolean isAvailable() { return !isMarked(); }
 }

@@ -16,9 +16,7 @@ class Session {
         String markX = game.playerX.getInput();
         game.playerX.setMark(markX);
 
-        display.promptPlayerToCustomiseMark(game.playerO.getMark());
-        String markO = game.playerO.getInput();
-        game.playerO.setMark(markO);
+        game.playerO.setMark("🖥");
 
         game.play();
     }
