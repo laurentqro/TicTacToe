@@ -6,7 +6,7 @@ public class Main {
         Display display = new Display(System.out, System.in);
         Board board = new Board();
         Player playerX = new HumanPlayer("X", display);
-        Player playerO = new HumanPlayer("O", display);
+        Player playerO = new ComputerPlayer("🖥", playerX);
         Game game = new Game(display, board, playerX, playerO);
         Session session = new Session(game, display);
 

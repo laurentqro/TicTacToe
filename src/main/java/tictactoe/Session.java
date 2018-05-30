@@ -13,12 +13,8 @@ class Session {
         display.printGreeting();
 
         display.promptPlayerToCustomiseMark(game.playerX.getMark());
-        String markX = game.playerX.getInput();
+        String markX = display.getInput();
         game.playerX.setMark(markX);
-
-        display.promptPlayerToCustomiseMark(game.playerO.getMark());
-        String markO = game.playerO.getInput();
-        game.playerO.setMark(markO);
 
         game.play();
     }
