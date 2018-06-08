@@ -1,6 +1,9 @@
 package tictactoe;
 
 import org.junit.Test;
+
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public class BoardTest {
@@ -84,5 +87,21 @@ public class BoardTest {
             board.markCellAtPosition(marks[i], position);
         }
         return board;
+    }
+
+    @Test
+    public void returnsAvailableMoves() {
+        Board board = boardWith("X");
+        List<Cell> availableCells = board.getAvailableMoves();
+
+        assert(availableCells.size() == 8);
+    }
+
+    @Test
+    public void returnsNoAvailableMovesIfGameOver() {
+        Board board = boardWith("X", "X", "X");
+        List<Cell> availableCells = board.getAvailableMoves();
+
+        assert(availableCells.isEmpty());
     }
 }

@@ -9,7 +9,7 @@ public class HumanPlayer extends Player {
     }
 
     @Override
-    public String getInput() {
+    public String getMove(Board _board) {
         return display.getInput();
     }
 }

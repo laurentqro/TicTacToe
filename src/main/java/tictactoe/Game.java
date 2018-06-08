@@ -56,7 +56,7 @@ class Game {
     }
 
     private int getMove() {
-        return Integer.parseInt(currentPlayer.getInput());
+        return Integer.parseInt(currentPlayer.getMove(board));
     }
 
     private void switchPlayers() {
